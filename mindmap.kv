@@ -1,52 +1,48 @@
 #:kivy 1.8
 
-<PongBall>:
-    size: 50, 50
-    canvas:
-        Ellipse:
-            pos: self.pos
-            size: self.size
-            
-<PongPaddle>:
-    size: 25, 200
+<MindMapWidget>
+	canvas:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			size: self.size
+			pos: self.pos
+	Button:
+		text: 'Settings'
+		size_hint: None, None
+		font_size: 15
+		on_release: app.open_settings()
 
-    canvas:
-        Rectangle:
-            pos: self.pos
-            size: self.size
+<Vertex>:
+	size: self.size
+	pos: self.pos
+	size_hint: None, None
 
-<PongGame>:
-    ball: pong_ball
-    player1: player_left
-    player2: player_right
+	do_rotation: False
+
+	canvas.before:
+		Color:
+		    rgba: 1, 1, 1, 1
+		Rectangle:
+	        pos: (0,0)
+	        size: self.size
 
 	canvas:
-        Rectangle:
-            pos: self.center_x -5, 0
-            size: 10, self.height
+	    Color:
+	        rgba: self.colour
+	    Line:
+	        ellipse: (0, 0, self.size[0], self.size[1])
+	        width: 2
+	    #Ellipse:
+	    	#pos: (0,0)
+	    	#size: (self.size[0], self.size[1])
 
-    Label:
-        font_size: 70
-        center_x: root.width / 4
-        top: root.top - 50
-        text: str(root.player1.score)
+<DeleteButton>
+	text: 'X'
+    font_size: 14
+    background_color: (.8, 0, .043, 1) #rgb: 204, 0 ,11  
+    size: 10,10
+    size_hint: None, None
+    	
 
-    Label:
-        font_size: 70
-        center_x: root.width * 3 / 4
-        top: root.top - 50
-        text: str(root.player2.score)
-
-    PongBall:
-        id: pong_ball
-        center: self.parent.center
-        
-    PongPaddle:
-        id: player_left
-        x: root.x
-        center_y: root.center_y
-        
-    PongPaddle:
-        id: player_right
-        x: root.width - self.width
-        center_y: root.center_y
+            
